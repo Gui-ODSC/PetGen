@@ -1,0 +1,10 @@
+Frontend
+    http://localhost:3000
+Backend
+    http://localhost:8080
+Mysql
+    Host: localhost
+    Porta: 3306
+    Database: pet_control_db
+    Usuário: root
+    Senha: root
