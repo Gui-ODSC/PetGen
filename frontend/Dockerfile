@@ -1,5 +1,4 @@
-# Etapa 1 - build
-FROM node:25 AS builder
+FROM node:20
 
 WORKDIR /app
 
@@ -8,13 +7,4 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build
-
-# Etapa 2 - runtime
-FROM node:25
-
-WORKDIR /app
-
-COPY --from=builder /app ./
-
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "dev"]
