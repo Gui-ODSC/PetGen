@@ -76,6 +76,27 @@ export default function LandingPage() {
 							</Button>
 						))}
 					</Box>
+
+					<Button
+						component="a"
+						href="/login"
+						variant="outlined"
+						color="secondary"
+						size="medium"
+						sx={(theme) => ({
+							textTransform: "none",
+							fontWeight: 800,
+							whiteSpace: "nowrap",
+							borderColor: alpha(theme.palette.common.white, 0.22),
+							backgroundColor: alpha(theme.palette.common.white, 0.04),
+							"&:hover": {
+								borderColor: alpha(theme.palette.common.white, 0.32),
+								backgroundColor: alpha(theme.palette.common.white, 0.08),
+							},
+						})}
+					>
+						Login / Sign-up
+					</Button>
 				</Toolbar>
 			</AppBar>
 
