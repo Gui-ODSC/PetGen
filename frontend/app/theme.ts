@@ -5,6 +5,9 @@ const theme = createTheme({
 		primary: {
 			main: "#000000",
 		},
+		secondary: {
+			main: "#ffffff",
+		},
 	},
 	typography: {
 		fontFamily: "Roboto, Arial, sans-serif",
