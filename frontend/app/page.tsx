@@ -13,6 +13,7 @@ import {
 	Typography,
 } from "@mui/material";
 import { alpha } from "@mui/material/styles";
+import PetsIcon from '@mui/icons-material/Pets';
 
 const NAV_ITEMS = [
 	{ label: "Home", href: "#principal" },
@@ -52,8 +53,11 @@ export default function LandingPage() {
 							flexGrow: 1,
 						}}
 					>
-						<Button color="secondary" size="small" href="#principal" sx={{ textTransform: "none", fontWeight: 700, fontSize: "1.25rem" }}>
-							PetGen
+						<Button color="secondary" size="small" href="#principal" sx={{ textTransform: "none", fontWeight: 700, fontSize: "1.25rem", alignItems: "center", gap: 0.5 }}>
+							<PetsIcon sx={{ mr: 0.5, fontSize: "1.5rem" }} />
+							<Typography variant="h6" component="span" sx={{ fontWeight: 700, letterSpacing: 0.2 }}>
+								PetGen
+							</Typography>
 						</Button>
 					</Typography>
 
@@ -74,7 +78,7 @@ export default function LandingPage() {
 				</Toolbar>
 			</AppBar>
 
-			<Box component="main" sx={{ pt: { xs: 8, sm: 8 } }}>
+			<Box component="main" sx={{ pt: { xs: 7, sm: 8 } }}>
 				<Box
 					id="principal"
 					component="section"
@@ -133,46 +137,183 @@ export default function LandingPage() {
 				<Box
 					id="servicos"
 					component="section"
-					sx={{
-						...SECTION_SX, background: "radial-gradient(circle at 30% 30%, rgba(90, 40, 140, 0.35), transparent 50%), linear-gradient(120deg, #191230, #371650)",
-					}}
+					sx={(theme) => ({
+						...SECTION_SX,
+						position: "relative",
+						overflow: "hidden",
+						color: theme.palette.common.white,
+						background:
+							"radial-gradient(circle at 30% 30%, rgba(90, 40, 140, 0.35), transparent 50%), linear-gradient(120deg, #191230, #371650)",
+						"&::before": {
+							content: '""',
+							position: "absolute",
+							inset: 0,
+							background: `linear-gradient(180deg, ${alpha(
+								theme.palette.common.black,
+								0.25,
+							)} 0%, ${alpha(theme.palette.common.black, 0.55)} 100%)`,
+							pointerEvents: "none",
+						},
+						"& > *": {
+							position: "relative",
+							zIndex: 1,
+						},
+					})}
 				>
-					<Container maxWidth="lg">
-						<Typography variant="h4" color="secondary" sx={{ fontWeight: 700 }}>
+					<Container maxWidth="lg" sx={{ pt: { xs: 0, sm: 0, md: 3, lg: 7, xl: 9 } }}>
+						<Typography
+							variant="h4"
+							color="secondary"
+							sx={{ fontWeight: 800, letterSpacing: 0.2 }}
+						>
 							Serviços
 						</Typography>
-						<Typography variant="body1" color="secondary" sx={{ mt: 1 }}>
+						<Typography
+							variant="body1"
+							color="secondary"
+							sx={{ mt: 1, opacity: 0.9, maxWidth: 680 }}
+						>
 							Organize o atendimento e padronize a rotina.
 						</Typography>
+						<Typography
+							variant="body2"
+							sx={(theme) => ({
+								mt: 1,
+								maxWidth: 820,
+								color: alpha(theme.palette.common.white, 0.78),
+								lineHeight: 1.7,
+							})}
+						>
+							Tenha uma visão clara do que foi cadastrado, do que está em andamento e do que
+							precisa de atenção — com informações centralizadas para reduzir retrabalho e
+							aumentar a previsibilidade do dia a dia.
+						</Typography>
 
-						<Grid container spacing={3} sx={{ mt: 2 }}>
+						<Grid container spacing={3} sx={{ mt: 3 }}>
 							{[
 								{
 									title: "Cadastro de pets",
 									desc: "Centralize informações e mantenha dados sempre atualizados.",
+									bullets: [
+										"Dados do tutor e contatos em um só lugar",
+										"Anotações importantes do pet (alergias, observações)",
+										"Histórico para consultas rápidas",
+										"Upload de fotos e documentos do pet",
+										"Controle de vacinas e datas importantes",
+										"Identificação rápida por tags ou categorias",
+									],
 								},
 								{
 									title: "Gestão de serviços",
 									desc: "Registre o que foi feito e acompanhe entregas com clareza.",
+									bullets: [
+										"Registro por data e responsável",
+										"Status do atendimento e próximas etapas",
+										"Padronização do atendimento no time",
+										"Histórico detalhado de serviços realizados",
+										"Agendamento integrado com calendário",
+										"Observações específicas por atendimento",
+									],
 								},
 								{
 									title: "Planos e recorrência",
 									desc: "Defina planos e facilite o controle do que está ativo.",
+									bullets: [
+										"Controle do que está ativo e do que venceu",
+										"Rotina previsível para serviços recorrentes",
+										"Apoio para acompanhar evolução ao longo do tempo",
+										"Configuração flexível de planos personalizados",
+										"Alertas de renovação e vencimento",
+										"Visão geral dos clientes recorrentes",
+									],
 								},
 							].map((item) => (
 								<Grid key={item.title} item xs={12} md={4}>
-									<Card variant="outlined" sx={{ height: "100%" }}>
-										<CardContent>
-											<Typography variant="h6" sx={{ fontWeight: 700 }}>
+									<Card
+										variant="outlined"
+										sx={(theme) => ({
+											height: "100%",
+											position: "relative",
+											overflow: "hidden",
+											borderColor: alpha(theme.palette.common.white, 0.16),
+											backgroundColor: alpha(theme.palette.common.white, 0.06),
+											backdropFilter: "blur(10px)",
+											"&::before": {
+												content: '""',
+												position: "absolute",
+												top: 0,
+												left: 0,
+												right: 0,
+												height: 2,
+												background: `linear-gradient(90deg, ${alpha(
+													theme.palette.common.white,
+													0,
+												)} 0%, ${alpha(theme.palette.common.white, 0.55)} 50%, ${alpha(
+													theme.palette.common.white,
+													0,
+												)} 100%)`,
+											},
+											"&:hover": {
+												borderColor: alpha(theme.palette.common.white, 0.28),
+												backgroundColor: alpha(theme.palette.common.white, 0.085),
+											},
+										})}
+									>
+										<CardContent sx={{ p: { xs: 3, sm: 3.5 } }}>
+											<Typography
+												variant="h6"
+												color="secondary"
+												sx={{ fontWeight: 800, letterSpacing: 0.1 }}
+											>
 												{item.title}
 											</Typography>
 											<Typography
 												variant="body2"
-												color="text.secondary"
-												sx={{ mt: 1 }}
+												sx={(theme) => ({
+													mt: 1.25,
+													color: alpha(theme.palette.common.white, 0.78),
+													lineHeight: 1.6,
+												})}
 											>
 												{item.desc}
 											</Typography>
+											<Divider
+												sx={(theme) => ({
+													my: 2,
+													borderColor: alpha(theme.palette.common.white, 0.14),
+												})}
+											/>
+											<Typography
+												variant="subtitle2"
+												sx={(theme) => ({
+													fontWeight: 800,
+													letterSpacing: 0.2,
+													color: alpha(theme.palette.common.white, 0.9),
+												})}
+											>
+												O que você ganha
+											</Typography>
+											<Box
+												component="ul"
+												sx={(theme) => ({
+													pl: 2,
+													mt: 1,
+													mb: 0,
+													color: alpha(theme.palette.common.white, 0.78),
+													lineHeight: 1.7,
+												})}
+											>
+												{item.bullets.map((text) => (
+													<Box key={text} component="li" sx={{ mt: 0.5 }}>
+														<Typography
+															variant="body2"
+															sx={(theme) => ({ color: alpha(theme.palette.common.white, 0.78) })}
+														>
+															{text}
+														</Typography>
+													</Box>
+												))}
+											</Box>
 										</CardContent>
 									</Card>
 								</Grid>
