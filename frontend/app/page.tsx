@@ -25,7 +25,7 @@ const NAV_ITEMS = [
 
 const SECTION_SX = {
 	scrollMarginTop: { xs: 55, sm: 65 },
-	py: { xs: 7, sm: 10 },
+	py: { xs: 7, sm: 7 },
 	minHeight: { xs: "100vh", sm: "100vh" },
 } as const;
 
@@ -182,7 +182,7 @@ export default function LandingPage() {
 						},
 					})}
 				>
-					<Container maxWidth="lg" sx={{ pt: { xs: 0, sm: 0, md: 3, lg: 7, xl: 9 } }}>
+					<Container maxWidth="lg">
 						<Typography
 							variant="h4"
 							color="secondary"
@@ -385,7 +385,7 @@ export default function LandingPage() {
 						},
 					})}
 				>
-					<Container maxWidth="lg" sx={{ pt: { xs: 0, sm: 0, md: 3, lg: 7, xl: 9 } }}>
+					<Container maxWidth="lg" >
 						<Typography
 							variant="h4"
 							color="secondary"
@@ -558,7 +558,7 @@ export default function LandingPage() {
 						},
 					})}
 				>
-					<Container maxWidth="lg" sx={{ pt: { xs: 0, sm: 0, md: 3, lg: 7, xl: 9 } }}>
+					<Container maxWidth="lg">
 						<Typography
 							variant="h4"
 							color="secondary"
