@@ -93,9 +93,3 @@ docker compose up -d
 ## 📖 Objetivo
 
 O objetivo do sistema é centralizar o gerenciamento de informações de pets em uma aplicação moderna, escalável e de fácil manutenção.
-
----
-
-## 👨‍💻 Autor
-
-Desenvolvido por Guilbert.
