@@ -51,6 +51,19 @@ services:
     networks:
       - app_network
 
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    environment:
+      ADMINER_DESIGN: "nette"
+    ports:
+      - "8081:8080"
+    depends_on:
+      - mysql
+    networks:
+      - app_network
+
 volumes:
   mysql_data:
 
