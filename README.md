@@ -52,6 +52,7 @@ Antes de iniciar o projeto, certifique-se de possuir instalado:
 
 - Docker
 - Docker Compose
+- Dev Container
 - Git
 
 ---
