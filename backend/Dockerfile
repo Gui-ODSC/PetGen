@@ -1,15 +1,32 @@
-FROM eclipse-temurin:25-jdk AS builder
+FROM php:8.2-fpm
 
-WORKDIR /app
+# Dependências do sistema
+RUN apt-get update && apt-get install -y \
+    git \
+    curl \
+    unzip \
+    zip \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev
+
+# Extensões PHP
+RUN docker-php-ext-install \
+    pdo \
+    pdo_mysql \
+    mbstring \
+    exif \
+    pcntl \
+    bcmath \
+    gd
+
+# Composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+WORKDIR /var/www
+
 COPY . .
 
-RUN chmod +x mvnw
-RUN ./mvnw clean package -DskipTests
+RUN composer install
 
-FROM eclipse-temurin:25-jdk
-
-WORKDIR /app
-
-COPY --from=builder /app/target/*.jar app.jar
-
-CMD ["java", "-jar", "app.jar"]
+CMD ["php-fpm"]
