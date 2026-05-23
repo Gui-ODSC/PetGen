@@ -27,11 +27,13 @@ Novas funcionalidades, documentação e melhorias serão adicionadas gradualment
 ### Banco de Dados
 
 - MySQL
+- Adminer
 
 ### Infraestrutura
 
 - Docker
 - Docker Compose
+- Dev Container
 
 ---
 
@@ -52,7 +54,6 @@ Antes de iniciar o projeto, certifique-se de possuir instalado:
 
 - Docker
 - Docker Compose
-- Dev Container
 - Git
 
 ---
