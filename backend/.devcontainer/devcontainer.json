@@ -1,0 +1,18 @@
+{
+	"name": "PetGen",
+	"dockerComposeFile": "../../docker-compose.yml",
+	"service": "backend",
+	"workspaceFolder": "/var/www",
+
+	"customizations": {
+    "vscode": {
+      "extensions": [
+        "bmewburn.vscode-intelephense-client",
+        "xdebug.php-debug",
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "mikestead.dotenv"
+      ]
+    }
+  }
+}
