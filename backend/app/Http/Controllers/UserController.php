@@ -43,4 +43,30 @@ class UserController extends Controller
             'created_at' => now(),
         ]);
     }
+
+    public function update(Request $request, int $id)
+    {
+        $user = User::findOrFail($id);
+
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'name' => 'sometimes|required|string|max:255',
+                'email' => 'sometimes|required|email|unique:users,email,' . $user->id,
+                'password' => [
+                    'sometimes',
+                    'required',
+                    'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+                ],
+            ]
+        );
+
+        $validated = $validator->validated();
+
+        if (isset($validated['password'])) {
+            $validated['password'] = Hash::make($validated['password']);
+        }
+
+        $user->update($validated);
+    }
 }
