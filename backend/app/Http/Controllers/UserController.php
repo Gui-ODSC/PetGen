@@ -42,6 +42,8 @@ class UserController extends Controller
             'password' => $validated['password'],
             'created_at' => now(),
         ]);
+
+        return response()->json(['message' => 'User created successfully'], 201);
     }
 
     public function update(Request $request, int $id)
