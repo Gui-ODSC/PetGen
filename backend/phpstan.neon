@@ -1,0 +1,10 @@
+parameters:
+    level: 10
+    paths:
+        - app
+        - routes
+    excludePaths:
+        - vendor
+        - .gitignore
+        - .gitattributes
+        - .env
