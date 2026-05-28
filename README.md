@@ -23,6 +23,7 @@ Novas funcionalidades, documentação e melhorias serão adicionadas gradualment
 
 - Laravel
 - PHP
+- PHPStan
 
 ### Banco de Dados
 
