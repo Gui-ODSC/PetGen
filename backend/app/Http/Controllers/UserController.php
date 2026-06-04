@@ -36,14 +36,21 @@ class UserController extends Controller
             $validated['password'] = Hash::make($validated['password']);
         }
 
-        User::create([
+        $clienteUsuario = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => $validated['password'],
             'created_at' => now(),
         ]);
 
-        return response()->json(['message' => 'User created successfully'], 201);
+        return response()->json([
+            'message' => 'User created successfully',
+            'data' => [
+                'id' => $clienteUsuario->id,
+                'name' => $clienteUsuario->name,
+                'email' => $clienteUsuario->email,
+            ]
+        ], 201);
     }
 
     public function update(Request $request, int $id)
