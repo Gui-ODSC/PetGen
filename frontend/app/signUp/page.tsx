@@ -1,25 +1,27 @@
 "use client";
-import ClienteUsuarioFormLogin from "@/components/clienteUsuario/ClienteUsuarioFormLogin";
-import useClienteUsuarioLogin from "@/hooks/cliente-usuario/cliente-usuario-login";
-import { ClienteUsuarioLoginRequestSchema, ClienteUsuarioLoginRequestType } from "@/hooks/cliente-usuario/cliente-usuario-type";
+
+import ClienteUsuarioForm from "@/components/clienteUsuario/ClienteUsuarioForm";
+import useClienteUsuarioCadastrar from "@/hooks/cliente-usuario/cliente-usuario-create";
+import { ClienteUsuarioCreateRequestSchema, ClienteUsuarioCreateRequestType } from "@/hooks/cliente-usuario/cliente-usuario-type";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { alpha, Box, Button, Card, CardContent, Container, Divider, Grid, TextField, Typography } from "@mui/material";
+import { alpha, Box, Button, Card, CardContent, Container, Divider, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 
-export default function LoginPage() {
-	const { formState: { errors }, control, handleSubmit } = useForm({
-		resolver: zodResolver(ClienteUsuarioLoginRequestSchema),
+export default function SignUp() {
+	const { formState: { errors }, handleSubmit, control } = useForm({
+		resolver: zodResolver(ClienteUsuarioCreateRequestSchema),
 		defaultValues: {
+			name: "",
 			email: "",
 			password: "",
 		}
-	})
+	});
 
-	const { clienteUsuarioLogin } = useClienteUsuarioLogin();
+	const { clienteUsuarioCadastrar } = useClienteUsuarioCadastrar();
 
-	const onSubmit = async (data: ClienteUsuarioLoginRequestType) => {
-		await clienteUsuarioLogin(data);
-	}
+	const onSubmit = async (data: ClienteUsuarioCreateRequestType) => {
+		await clienteUsuarioCadastrar(data);
+	};
 
 	return (
 		<Box
@@ -62,13 +64,13 @@ export default function LoginPage() {
 		>
 			<Container maxWidth="sm">
 				<Typography variant="h4" color="secondary" sx={{ fontWeight: 800, letterSpacing: 0.2 }}>
-					Login / Cadastro
+					Crie sua conta
 				</Typography>
 				<Typography
 					variant="body2"
 					sx={(theme) => ({ mt: 1, color: alpha(theme.palette.common.white, 0.78), lineHeight: 1.7 })}
 				>
-					Acesse sua conta para gerenciar seus pets ou crie uma nova em poucos passos.
+					Monte seu perfil para acompanhar pets, histórico e próximos cuidados em um só lugar.
 				</Typography>
 
 				<Card
@@ -81,27 +83,28 @@ export default function LoginPage() {
 					})}
 				>
 					<CardContent sx={{ p: { xs: 3, sm: 3.5 } }}>
-						<ClienteUsuarioFormLogin control={control} errors={errors} />
+						<ClienteUsuarioForm control={control} errors={errors} />
+
 						<Button
 							fullWidth
 							variant="contained"
 							color="secondary"
-							onClick={handleSubmit(onSubmit)}
 							sx={(theme) => ({
 								mt: 2,
 								textTransform: "none",
 								fontWeight: 900,
 								color: theme.palette.common.black,
 							})}
+							onClick={handleSubmit(onSubmit)}
 						>
-							Entrar
+							Criar conta
 						</Button>
 
 						<Divider sx={(theme) => ({ my: 2.5, borderColor: alpha(theme.palette.common.white, 0.14) })} />
 
 						<Button
 							fullWidth
-							href="/signUp"
+							href="/login"
 							variant="outlined"
 							color="secondary"
 							sx={(theme) => ({
@@ -115,7 +118,7 @@ export default function LoginPage() {
 								},
 							})}
 						>
-							Criar conta
+							Já tenho conta
 						</Button>
 
 						<Button
