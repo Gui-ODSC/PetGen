@@ -1,6 +1,6 @@
 import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 import localFont from "next/font/local";
-import ThemeRegistry from "../styles/ThemeRegistry";
+import { Providers } from "./providers";
 
 const geistSans = localFont({
 	src: "./fonts/GeistVF.woff",
@@ -28,9 +28,9 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				<ThemeRegistry>
+				<Providers>
 					{children}
-				</ThemeRegistry>
+				</Providers>
 			</body>
 		</html>
 	);
