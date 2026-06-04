@@ -18,6 +18,10 @@ Novas funcionalidades, documentação e melhorias serão adicionadas gradualment
 - Next.js
 - TypeScript
 - Tailwind CSS
+- Zod
+- React Hook Form
+- Tanstack Query
+- Notistack
 
 ### Back-end
 
@@ -76,7 +80,7 @@ cd PetGen
 ### 3. Suba os containers
 
 ```bash
-docker compose up -d
+docker compose up
 ```
 
 ---
