@@ -5,6 +5,7 @@ import useClienteUsuarioCadastrar from "@/hooks/cliente-usuario/cliente-usuario-
 import { ClienteUsuarioCreateRequestSchema, ClienteUsuarioCreateRequestType } from "@/hooks/cliente-usuario/cliente-usuario-type";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { alpha, Box, Button, Card, CardContent, Container, Divider, TextField, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 export default function SignUp() {
@@ -17,10 +18,15 @@ export default function SignUp() {
 		}
 	});
 
+	const router = useRouter();
+
 	const { clienteUsuarioCadastrar } = useClienteUsuarioCadastrar();
 
 	const onSubmit = async (data: ClienteUsuarioCreateRequestType) => {
 		await clienteUsuarioCadastrar(data);
+
+		router.push("/login");
+
 	};
 
 	return (

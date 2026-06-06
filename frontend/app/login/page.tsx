@@ -1,9 +1,10 @@
 "use client";
-import ClienteUsuarioFormLogin from "@/components/clienteUsuario/ClienteUsuarioFormLogin";
-import useClienteUsuarioLogin from "@/hooks/cliente-usuario/cliente-usuario-login";
-import { ClienteUsuarioLoginRequestSchema, ClienteUsuarioLoginRequestType } from "@/hooks/cliente-usuario/cliente-usuario-type";
+import ClienteUsuarioFormLogin from "@/components/auth/ClienteUsuarioFormLogin";
+import { ClienteUsuarioLoginRequestSchema, ClienteUsuarioLoginRequestType } from "@/hooks/auth/auth-types";
+import useClienteUsuarioLogin from "@/hooks/auth/login";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { alpha, Box, Button, Card, CardContent, Container, Divider, Grid, TextField, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 export default function LoginPage() {
@@ -15,10 +16,14 @@ export default function LoginPage() {
 		}
 	})
 
+	const router = useRouter();
+
 	const { clienteUsuarioLogin } = useClienteUsuarioLogin();
 
 	const onSubmit = async (data: ClienteUsuarioLoginRequestType) => {
 		await clienteUsuarioLogin(data);
+
+		router.push('/dashboard');
 	}
 
 	return (
