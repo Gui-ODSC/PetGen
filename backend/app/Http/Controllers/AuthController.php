@@ -10,24 +10,35 @@ class AuthController extends Controller
 {
     public function logIn(Request $request)
     {
-        if (! Auth::attempt($request->only('email', 'password'))) {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => [
+                    'required',
+                    'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+                ],
+        ]);
+
+        if (! Auth::attempt($credentials)) {
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
 
-        $user = Auth::user();
-        $token = $user->createToken('auth_token')->plainTextToken;
+        $request->session()->regenerate();
 
         return response()->json([
             'message' => 'Login successful',
-            'access_token' => $token,
-            'token_type' => 'Bearer',
         ]);
     }
 
     public function logOut(Request $request)
     {
-        $request->user()->tokens()->where('name', 'auth_token')->delete();
+        Auth::guard('web')->logout();
 
-        return response()->json(['message' => 'Logout successful']);
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return response()->json([
+            'message' => 'Logout realizado'
+        ]);
     }
 }

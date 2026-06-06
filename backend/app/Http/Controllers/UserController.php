@@ -15,6 +15,11 @@ class UserController extends Controller
         return User::all();
     }
 
+    public function me(Request $request)
+    {
+        return response()->json($request->user());
+    }
+
     public function create(Request $request)
     {
 
@@ -29,6 +34,10 @@ class UserController extends Controller
                 ],
             ]
         );
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
 
         $validated = $validator->validated();
 
