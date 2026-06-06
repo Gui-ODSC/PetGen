@@ -1,4 +1,4 @@
-import { ClienteUsuarioLoginRequestType } from "@/hooks/cliente-usuario/cliente-usuario-type";
+import { ClienteUsuarioLoginRequestType } from "@/hooks/auth/auth-types";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { alpha, Grid, IconButton, InputAdornment, TextField } from "@mui/material";
 import { useState } from "react";
