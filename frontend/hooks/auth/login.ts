@@ -1,11 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import {
-	ClienteUsuarioLoginResponseType,
-	ClienteUsuarioLoginRequestType,
-	ClienteUsuarioLoginResponseSchema,
-} from "./cliente-usuario-type";
-import axiosInstance from "@/lib/axios";
 import { enqueueSnackbar } from "notistack";
+import { api, sanctumApi } from "@/lib/axios";
+import { ClienteUsuarioLoginRequestType } from "./auth-types";
 
 export default function useClienteUsuarioLogin() {
 	const mutation = useMutation({
@@ -13,16 +9,14 @@ export default function useClienteUsuarioLogin() {
 			email,
 			password,
 		}: ClienteUsuarioLoginRequestType) => {
-			const response =
-				await axiosInstance.post<ClienteUsuarioLoginResponseType>(
-					"/api/users/login",
-					{
-						email,
-						password,
-					},
-				);
+			await sanctumApi.get("/sanctum/csrf-cookie");
 
-			return ClienteUsuarioLoginResponseSchema.parse(response.data);
+			const { data } = await api.post("/login", {
+				email,
+				password,
+			});
+
+			return data;
 		},
 		onError() {
 			enqueueSnackbar("Erro ao fazer login!", { variant: "error" });

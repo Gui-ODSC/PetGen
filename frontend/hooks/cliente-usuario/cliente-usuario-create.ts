@@ -1,4 +1,3 @@
-import axiosInstance from "@/lib/axios";
 import { useMutation } from "@tanstack/react-query";
 import { enqueueSnackbar } from "notistack";
 import {
@@ -6,6 +5,7 @@ import {
 	ClienteUsuarioCreateResponseSchema,
 	ClienteUsuarioCreateResponseType,
 } from "./cliente-usuario-type";
+import { api } from "@/lib/axios";
 
 export default function useClienteUsuarioCadastrar() {
 	const mutation = useMutation({
@@ -14,15 +14,14 @@ export default function useClienteUsuarioCadastrar() {
 			email,
 			password,
 		}: ClienteUsuarioCreateRequestType) => {
-			const response =
-				await axiosInstance.post<ClienteUsuarioCreateResponseType>(
-					"/api/users/create",
-					{
-						name,
-						email,
-						password,
-					},
-				);
+			const response = await api.post<ClienteUsuarioCreateResponseType>(
+				"/users/create",
+				{
+					name,
+					email,
+					password,
+				},
+			);
 			return ClienteUsuarioCreateResponseSchema.parse(response.data);
 		},
 		onError() {
