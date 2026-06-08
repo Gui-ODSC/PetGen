@@ -2,16 +2,23 @@ import { Avatar, Box, Grid, IconButton, Menu, MenuItem, Tooltip, Typography } fr
 import AppBar from '@mui/material/AppBar';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
+import ClienteUsuarioDialogConfirmLogout from '../auth/ClienteUsuarioDialogConfirmLogout';
 
 export default function BaseAppBar() {
 
 	const options = ['Perfil', 'Conta', 'Dashboard', 'Sair'];
+
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+	const [openDialogConfirmLogout, setOpenDialogConfirmLogout] = useState(false);
+
 	const open = Boolean(anchorEl);
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
 		setAnchorEl(event.currentTarget);
 	};
-	const handleClose = () => {
+	const handleClose = (option?: string) => {
+		if (option === 'Sair') {
+			setOpenDialogConfirmLogout(true);
+		}
 		setAnchorEl(null);
 	};
 
@@ -20,14 +27,14 @@ export default function BaseAppBar() {
 			<Grid sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", pt: 1, pb: 1, pr: 2, pl: 2 }} >
 				<Box display={"flex"} alignItems={"center"} justifyContent={"start"}>
 					<IconButton size='small' sx={{ p: 0 }}>
-						<MenuIcon sx={{ width: 30, height: 30 }} color='secondary' />
+						<MenuIcon sx={{ width: 25, height: 25 }} color='secondary' />
 					</IconButton>
 				</Box>
 				<Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
 					<Grid>
 						<Tooltip title="Abrir configurações">
 							<IconButton onClick={handleClick} sx={{ p: 0 }}>
-								<Avatar alt="Remy Sharp" src="../../public/lading-page-enterprise.png" />
+								<Avatar sx={{ width: 32, height: 32 }} alt="Remy Sharp" src="../../public/lading-page-enterprise.png" />
 							</IconButton>
 						</Tooltip>
 						<Menu
@@ -35,7 +42,7 @@ export default function BaseAppBar() {
 							aria-labelledby="demo-positioned-button"
 							anchorEl={anchorEl}
 							open={open}
-							onClose={handleClose}
+							onClose={() => handleClose()}
 							slotProps={{
 								paper: {
 									elevation: 0,
@@ -72,7 +79,7 @@ export default function BaseAppBar() {
 							{options.map((option) => (
 								<MenuItem
 									key={option}
-									onClick={handleClose}
+									onClick={() => handleClose(option)}
 									sx={{
 										color: "white",
 										borderRadius: 1,
@@ -89,6 +96,10 @@ export default function BaseAppBar() {
 					</Grid>
 				</Box>
 			</Grid >
+			<ClienteUsuarioDialogConfirmLogout
+				open={openDialogConfirmLogout}
+				onClose={() => setOpenDialogConfirmLogout(false)}
+			/>
 		</AppBar >
 	);
 }
