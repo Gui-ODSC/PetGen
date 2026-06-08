@@ -1,10 +1,13 @@
 import BaseAppBar from "@/components/layout/AppBar";
+import { Grid, Typography } from "@mui/material";
 
 export default function DashboardPage() {
 	return (
-		<div>
-			<h1>Dashboard</h1>
-			<p>Bem-vindo ao dashboard!</p>
-		</div>
+		<Grid container display={"flex"} mt={3} justifyContent={"center"}>
+			<Grid display={"flex"} flexDirection={"column"} alignItems={"center"}>
+				<Typography variant="h4">Dashboard</Typography>
+				<Typography>Bem-vindo ao dashboard!</Typography>
+			</Grid>
+		</Grid>
 	);
 }
