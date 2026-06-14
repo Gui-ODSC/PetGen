@@ -14,23 +14,35 @@ export default function ClienteUsuarioDialogConfirmLogout({ open, onClose }: { o
 	}
 
 	return (
-		<Dialog open={open} onClose={onClose}>
-			<DialogTitle sx={{ backgroundColor: "black", border: 1, padding: 1.5 }} >
+		<Dialog open={open} onClose={onClose} fullWidth maxWidth="xs" PaperProps={{
+			sx: {
+				backgroundColor: "#252235",
+				overflow: "hidden",
+				borderRadius: 1,
+				boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.5)"
+			},
+		}}
+		>
+			<DialogTitle sx={{
+				backgroundColor: "black"
+			}}
+			>
 				<Typography fontSize={15} color="secondary" fontWeight={"bold"}>Deseja realmente sair?</Typography>
-			</DialogTitle>
-			<DialogContent sx={{ padding: 0 }}>
+			</DialogTitle >
+			<DialogContent sx={{ padding: 0, color: "secondary.main" }}>
 				<Typography
 					fontSize={14}
 					sx={{
 						m: 3,
 						display: "flex",
-						alignContent: "center"
+						textAlign: "center",
+						justifyContent: "center",
 					}}>
 					Clique no botão "Sair" para confirmar.
 				</Typography>
 			</DialogContent>
 			<Divider />
-			<DialogActions sx={{ display: "flex", justifyContent: "space-between" }}>
+			<DialogActions sx={{ display: "flex", padding: 1.5, justifyContent: "space-between", backgroundColor: "#252235" }}>
 				<Button disabled={clienteUsuarioLogoutIsLoading} size="small" variant="contained" onClick={onClose}>Cancelar</Button>
 				<Button disabled={clienteUsuarioLogoutIsLoading} size="small" variant="contained" color="error" onClick={logoutHandler}>Sair</Button>
 			</DialogActions>
