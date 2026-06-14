@@ -3,13 +3,25 @@ import AppBar from '@mui/material/AppBar';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
 import ClienteUsuarioDialogConfirmLogout from '../auth/ClienteUsuarioDialogConfirmLogout';
+import { useRouter } from 'next/navigation';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LogoutIcon from '@mui/icons-material/Logout';
+import SettingsIcon from '@mui/icons-material/Settings';
+import HelpIcon from '@mui/icons-material/Help';
 
 export default function BaseAppBar() {
 
-	const options = ['Perfil', 'Conta', 'Dashboard', 'Sair'];
+	const options = {
+		'Perfil': <AccountCircleIcon />,
+		'Configurações': <SettingsIcon />,
+		'Ajuda': <HelpIcon />,
+		'Sair': <LogoutIcon />
+	};
 
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 	const [openDialogConfirmLogout, setOpenDialogConfirmLogout] = useState(false);
+
+	const router = useRouter();
 
 	const open = Boolean(anchorEl);
 	const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -18,23 +30,30 @@ export default function BaseAppBar() {
 	const handleClose = (option?: string) => {
 		if (option === 'Sair') {
 			setOpenDialogConfirmLogout(true);
+		} else if (option === 'Perfil') {
+			router.push('/perfil');
+		} else if (option === 'Configurações') {
+			router.push('/configuracoes');
+		} else if (option === 'Ajuda') {
+			router.push('/ajuda');
+		} else {
+			setAnchorEl(null);
 		}
-		setAnchorEl(null);
 	};
 
 	return (
-		<AppBar position="static" sx={{ backgroundColor: "#111017" }} elevation={5}>
+		<AppBar position="fixed" sx={{ backgroundColor: "#111017", height: 64, justifyContent: "center" }} elevation={5}>
 			<Grid sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", pt: 1, pb: 1, pr: 2, pl: 2 }} >
 				<Box display={"flex"} alignItems={"center"} justifyContent={"start"}>
 					<IconButton size='small' sx={{ p: 0 }}>
-						<MenuIcon sx={{ width: 25, height: 25 }} color='secondary' />
+						<MenuIcon color='secondary' />
 					</IconButton>
 				</Box>
 				<Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
 					<Grid>
 						<Tooltip title="Abrir configurações">
 							<IconButton onClick={handleClick} sx={{ p: 0 }}>
-								<Avatar sx={{ width: 32, height: 32 }} alt="Remy Sharp" src="../../public/lading-page-enterprise.png" />
+								<Avatar alt="Remy Sharp" src="../../public/lading-page-enterprise.png" />
 							</IconButton>
 						</Tooltip>
 						<Menu
@@ -76,10 +95,10 @@ export default function BaseAppBar() {
 							transformOrigin={{ horizontal: 'right', vertical: 'top' }}
 							anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
 						>
-							{options.map((option) => (
+							{Object.entries(options).map(([key, icon]) => (
 								<MenuItem
-									key={option}
-									onClick={() => handleClose(option)}
+									key={key}
+									onClick={() => handleClose(key)}
 									sx={{
 										color: "white",
 										borderRadius: 1,
@@ -89,7 +108,10 @@ export default function BaseAppBar() {
 										},
 									}}
 								>
-									{option}
+									<Grid display={"flex"} alignItems={"center"} gap={1}>
+										{icon}
+										<Typography fontSize={14}>{key}</Typography>
+									</Grid>
 								</MenuItem>
 							))}
 						</Menu>
