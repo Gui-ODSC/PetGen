@@ -28,6 +28,8 @@ export default function BaseAppBar() {
 		setAnchorEl(event.currentTarget);
 	};
 	const handleClose = (option?: string) => {
+		setAnchorEl(null);
+
 		if (option === 'Sair') {
 			setOpenDialogConfirmLogout(true);
 		} else if (option === 'Perfil') {
@@ -36,8 +38,6 @@ export default function BaseAppBar() {
 			router.push('/configuracoes');
 		} else if (option === 'Ajuda') {
 			router.push('/ajuda');
-		} else {
-			setAnchorEl(null);
 		}
 	};
 
@@ -53,7 +53,7 @@ export default function BaseAppBar() {
 					<Grid>
 						<Tooltip title="Abrir configurações">
 							<IconButton onClick={handleClick} sx={{ p: 0 }}>
-								<Avatar alt="Remy Sharp" src="../../public/lading-page-enterprise.png" />
+								<Avatar alt="Remy Sharp" sx={{ border: 1, borderColor: "white" }} src="/lading-page-enterprise.png" />
 							</IconButton>
 						</Tooltip>
 						<Menu
