@@ -5,7 +5,7 @@ import {
 	ClienteUsuarioCreateResponseSchema,
 	ClienteUsuarioCreateResponseType,
 } from "./cliente-usuario-type";
-import { api } from "@/lib/axios";
+import { api, sanctumApi } from "@/lib/axios";
 
 export default function useClienteUsuarioCadastrar() {
 	const mutation = useMutation({
@@ -14,6 +14,8 @@ export default function useClienteUsuarioCadastrar() {
 			email,
 			password,
 		}: ClienteUsuarioCreateRequestType) => {
+			await sanctumApi.get("/sanctum/csrf-cookie");
+
 			const response = await api.post<ClienteUsuarioCreateResponseType>(
 				"/users/create",
 				{

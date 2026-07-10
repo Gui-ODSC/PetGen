@@ -48,6 +48,7 @@ class UserController extends Controller
         $clienteUsuario = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
+            'active' => true,
             'password' => $validated['password'],
             'created_at' => now(),
         ]);
